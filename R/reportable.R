@@ -1,10 +1,11 @@
-## Define a function to make the tables right.
+#' @title reporTable
+#' @description an HTML widget for creating an interactive table.
 #' @export
 reporTable <- function(x, ...) {
   DT::datatable(
-    data=x, 
+    data=x,
     extensions = c('Buttons', 'ColReorder' #, 'Scroller'
-    ), 
+    ),
     filter = list(position = 'top', clear = FALSE),
     rownames = FALSE,
     # options = list(autoWidth = TRUE)
@@ -13,12 +14,12 @@ reporTable <- function(x, ...) {
       buttons = c('copy', 'csv', 'excel'), #  'colvis',
       autoWidth = FALSE,
       pageLength=min(nrow(x), 10),
-      search = list(regex = TRUE), 
-      autoHideNavigation = TRUE, 
+      search = list(regex = TRUE),
+      autoHideNavigation = TRUE,
       colReorder = TRUE,
       scroller = TRUE,
-      scrollY = 600, 
-      scrollX = TRUE, 
+      scrollY = 600,
+      scrollX = TRUE,
       dom = 'Blftip') # dom = 'tBlip',
   ) }
 
@@ -57,6 +58,6 @@ report_source_if <- function(reports, source='', title=source, format='pdf') {
     dplyr::filter(Source==source) %>%
     dplyr::select(-Source)
   if(nrow(reports)>0) {
-    reports %>% 
+    reports %>%
       pdf_table(title=title) %>%
       return() } }
